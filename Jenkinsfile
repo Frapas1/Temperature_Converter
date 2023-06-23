@@ -1,6 +1,7 @@
 pipeline {
     agent{
         docker {image 'python3:3.12.0b3-alpine'}
+    }
     stages {
         stage('Checkout') {
             steps {
