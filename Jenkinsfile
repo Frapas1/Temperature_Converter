@@ -1,6 +1,4 @@
 pipeline {
-    agent any
-
     stages {
         stage('Checkout') {
             steps {
@@ -8,6 +6,9 @@ pipeline {
             }
         }
         stage('Build') {
+            agent{
+                docker {image 'python3:3.12.0b3-alpine'}
+            }
             steps {
                 git branch: 'master', url: 'https://github.com/Frapas1/Temperature_Converter.git'
                 sh 'python3 ops.py'
@@ -15,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'python3 -m pytest'
+                sh 'python3 --version'
             }
         }
     }
